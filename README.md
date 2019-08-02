@@ -3,8 +3,8 @@ Based on [Jumpstart](https://github.com/excid3/jumpstart)\
 **Note:** Requires Rails 6.0.0.rc2 or higher
 
 ## Changes to Jumpstart
-* Users are `People` | a User is a `Person`
-* Account registration is disabled, use `Person.create!()` or the admin portal
+* Users changed to `Accounts` | User changed to `Account`
+* Account registration is disabled, use `Account.create!()` or the admin portal
 * Announcements removed
 * Omniauth removed
 * Sitemap removed
@@ -43,11 +43,11 @@ This will run `Procfile.dev` via `foreman start -f Procfile.dev` as configured b
 
 A separate `Procfile` is generated for deploying to production.
 
-#### Creating the first admin
+#### Creating the first admin account
 
 ```bash
 rails c
-Person.create!(first_name: 'John', last_name: 'Doe', email: 'john.doe@example.com', password: 'password', admin: true)
+Account.create!(first_name: 'John', last_name: 'Doe', email: 'john.doe@example.com', password: 'password', admin: true)
 ```
 
 #### Cleaning up
