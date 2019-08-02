@@ -49,11 +49,11 @@ def set_application_name
   # Add Application Name to Config
   environment "config.application_name = Rails.application.class.module_parent_name"
 
-  # Announce the user where he can change the application name in the future.
+  # Announce the person where he can change the application name in the future.
   puts "You can change application name inside: ./config/application.rb"
 end
 
-def add_users
+def add_people
   # Install Devise
   generate "devise:install"
 
@@ -65,8 +65,8 @@ def add_users
   # Devise notices are installed via Bootstrap
   generate "devise:views:bootstrapped"
 
-  # Create Devise User
-  generate :devise, "User",
+  # Create Devise Person
+  generate :devise, "Person",
            "first_name",
            "last_name",
            "admin:boolean"
@@ -83,8 +83,8 @@ def add_users
       "  config.secret_key = Rails.application.credentials.secret_key_base"
   end
 
-  # Add Devise masqueradable to users
-  inject_into_file("app/models/user.rb", "masqueradable, :", after: "devise :")
+  # Add Devise masqueradable to people
+  inject_into_file("app/models/person.rb", "masqueradable, :", after: "devise :")
 end
 
 
@@ -126,7 +126,7 @@ def add_sidekiq
     before: "Rails.application.routes.draw do"
 
   content = <<-RUBY
-    authenticate :user, lambda { |u| u.admin? } do
+    authenticate :person, lambda { |u| u.admin? } do
       mount Sidekiq::Web => '/sidekiq'
     end
   RUBY
@@ -142,17 +142,17 @@ end
 def add_administrate
   generate "administrate:install"
 
-  gsub_file "app/dashboards/user_dashboard.rb",
+  gsub_file "app/dashboards/person_dashboard.rb",
     /email: Field::String/,
     "email: Field::String,\n    password: Field::String.with_options(searchable: false)"
 
-  gsub_file "app/dashboards/user_dashboard.rb",
+  gsub_file "app/dashboards/person_dashboard.rb",
     /FORM_ATTRIBUTES = \[/,
     "FORM_ATTRIBUTES = [\n    :password,"
 
   gsub_file "app/controllers/admin/application_controller.rb",
     /# TODO Add authentication logic here\./,
-    "redirect_to '/', alert: 'Not authorized.' unless user_signed_in? && current_user.admin?"
+    "redirect_to '/', alert: 'Not authorized.' unless person_signed_in? && current_person.admin?"
 
   environment do <<-RUBY
     # Expose our application's helpers to Administrate
@@ -189,7 +189,7 @@ add_gems
 after_bundle do
   set_application_name
   stop_spring
-  add_users
+  add_people
   add_javascript
   add_notifications
   add_sidekiq
