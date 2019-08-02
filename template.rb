@@ -69,7 +69,6 @@ def add_users
   generate :devise, "User",
            "first_name",
            "last_name",
-           "announcements_last_read_at:datetime",
            "admin:boolean"
 
   # Set admin default to false
@@ -134,10 +133,6 @@ def add_sidekiq
   insert_into_file "config/routes.rb", "#{content}\n\n", after: "Rails.application.routes.draw do\n"
 end
 
-def add_announcements
-  generate "model Announcement published_at:datetime announcement_type name description:text"
-  route "resources :announcements, only: [:index]"
-end
 
 def add_notifications
   generate "model Notification recipient_id:bigint actor_id:bigint read_at:datetime action:string notifiable_id:bigint notifiable_type:string"
@@ -146,10 +141,6 @@ end
 
 def add_administrate
   generate "administrate:install"
-
-  #gsub_file "app/dashboards/announcement_dashboard.rb",
-    #/announcement_type: Field::String/,
-    #"announcement_type: Field::Select.with_options(collection: Announcement::TYPES)"
 
   gsub_file "app/dashboards/user_dashboard.rb",
     /email: Field::String/,
@@ -200,7 +191,6 @@ after_bundle do
   stop_spring
   add_users
   add_javascript
-  add_announcements
   add_notifications
   add_sidekiq
   add_friendly_id
