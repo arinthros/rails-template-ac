@@ -41,7 +41,6 @@ def add_gems
   gem 'mini_magick', '~> 4.9', '>= 4.9.2'
   gem 'name_of_person', '~> 1.1'
   gem 'sidekiq', '~> 5.2', '>= 5.2.5'
-  gem 'sitemap_generator', '~> 6.0', '>= 6.0.1'
   gem 'whenever', require: false
 
 end
@@ -191,10 +190,6 @@ def stop_spring
   run "spring stop"
 end
 
-def add_sitemap
-  rails_command "sitemap:install"
-end
-
 # Main setup
 add_template_repository_to_source_path
 
@@ -212,7 +207,6 @@ after_bundle do
 
   copy_templates
   add_whenever
-  add_sitemap
 
   # Migrate
   rails_command "db:create"
