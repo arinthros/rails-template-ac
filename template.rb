@@ -48,9 +48,6 @@ def add_gems
   gem 'gravatar_image_tag', github: 'mdeering/gravatar_image_tag'
   gem 'mini_magick', '~> 4.9', '>= 4.9.2'
   gem 'name_of_person', '~> 1.1'
-  gem 'omniauth-facebook', '~> 5.0'
-  gem 'omniauth-github', '~> 1.3'
-  gem 'omniauth-twitter', '~> 1.4'
   gem 'sidekiq', '~> 5.2', '>= 5.2.5'
   gem 'sitemap_generator', '~> 6.0', '>= 6.0.1'
   gem 'whenever', require: false
@@ -105,7 +102,7 @@ def add_users
   end
 
   # Add Devise masqueradable to users
-  inject_into_file("app/models/user.rb", "omniauthable, :masqueradable, :", after: "devise :")
+  inject_into_file("app/models/user.rb", "masqueradable, :", after: "devise :")
 end
 
 def add_webpack
@@ -204,26 +201,6 @@ def add_administrate
   end
 end
 
-def add_multiple_authentication
-    insert_into_file "config/routes.rb",
-    ', controllers: { omniauth_callbacks: "users/omniauth_callbacks" }',
-    after: "  devise_for :users"
-
-    generate "model Service user:references provider uid access_token access_token_secret refresh_token expires_at:datetime auth:text"
-
-    template = """
-    env_creds = Rails.application.credentials[Rails.env.to_sym] || {}
-    %i{ facebook twitter github }.each do |provider|
-      if options = env_creds[provider]
-        config.omniauth provider, options[:app_id], options[:app_secret], options.fetch(:options, {})
-      end
-    end
-    """.strip
-
-    insert_into_file "config/initializers/devise.rb", "  " + template + "\n\n",
-          before: "  # ==> Warden configuration"
-end
-
 def add_whenever
   run "wheneverize ."
 end
@@ -259,7 +236,6 @@ after_bundle do
   add_javascript
   add_announcements
   add_notifications
-  add_multiple_authentication
   add_sidekiq
   add_friendly_id
 
