@@ -9,15 +9,15 @@ require "shellwords"
 def add_template_repository_to_source_path
   if __FILE__ =~ %r{\Ahttps?://}
     require "tmpdir"
-    source_paths.unshift(tempdir = Dir.mktmpdir("jumpstart-"))
+    source_paths.unshift(tempdir = Dir.mktmpdir("rails-template-ac-"))
     at_exit { FileUtils.remove_entry(tempdir) }
     git clone: [
       "--quiet",
-      "https://github.com/excid3/jumpstart.git",
+      "https://github.com/arinthros/rails-template-ac.git",
       tempdir
     ].map(&:shellescape).join(" ")
 
-    if (branch = __FILE__[%r{jumpstart/(.+)/template.rb}, 1])
+    if (branch = __FILE__[%r{rails-template-ac/(.+)/template.rb}, 1])
       Dir.chdir(tempdir) { git checkout: branch }
     end
   else
@@ -221,7 +221,7 @@ after_bundle do
   git commit: %Q{ -m 'Initial commit' }
 
   say
-  say "Jumpstart app successfully created!", :blue
+  say "Template app #{app_name} successfully created!", :blue
   say
   say "To get started with your new app:", :green
   say "cd #{app_name} - Switch to your new app's directory."
