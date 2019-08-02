@@ -61,14 +61,14 @@ development:
     app_id: something
     app_secret: something
     options:
-      scope: 'user:email'
+      scope: 'person:email'
       whatever: true
 production:
   github:
     app_id: something
     app_secret: something
     options:
-      scope: 'user:email'
+      scope: 'person:email'
       whatever: true
 ```
 
