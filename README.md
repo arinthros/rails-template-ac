@@ -9,6 +9,7 @@ Based on [Jumpstart](https://github.com/excid3/jumpstart)
 * Omniauth removed
 * Sitemap removed
 * Mini_magick removed
+* Notifications removed (throwing errors in Jumpstart)
 
 ## Getting Started
 
