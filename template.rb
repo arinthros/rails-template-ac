@@ -132,12 +132,6 @@ def add_sidekiq
   insert_into_file "config/routes.rb", "#{content}\n\n", after: "Rails.application.routes.draw do\n"
 end
 
-
-def add_notifications
-  generate "model Notification recipient_id:bigint actor_id:bigint read_at:datetime action:string notifiable_id:bigint notifiable_type:string"
-  route "resources :notifications, only: [:index]"
-end
-
 def add_administrate
   generate "administrate:install"
 
@@ -194,10 +188,8 @@ after_bundle do
   stop_spring
   add_people
   add_javascript
-  add_notifications
   add_sidekiq
   add_friendly_id
-
   copy_templates
   add_whenever
 

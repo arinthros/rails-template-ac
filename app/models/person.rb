@@ -5,6 +5,4 @@ class Person < ApplicationRecord
 
   has_person_name
 
-  has_many :notifications, foreign_key: :recipient_id
-
 end
