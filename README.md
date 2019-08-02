@@ -43,6 +43,13 @@ This will run `Procfile.dev` via `foreman start -f Procfile.dev` as configured b
 
 A separate `Procfile` is generated for deploying to production.
 
+#### Creating the first admin
+
+```bash
+rails c
+Person.create!(first_name: 'John', last_name: 'Doe', email: 'john.doe@example.com', password: 'password', admin: true)
+```
+
 #### Cleaning up
 
 ```bash
