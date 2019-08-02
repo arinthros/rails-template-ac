@@ -1,5 +1,6 @@
 # Rails Template with Action Cable
 Based on [Jumpstart](https://github.com/excid3/jumpstart)
+
 **Note:** Requires Rails 6.0.0.rc2 or higher
 
 ## Changes to Jumpstart
