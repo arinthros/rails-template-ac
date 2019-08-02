@@ -32,14 +32,14 @@ end
 def add_gems
   gem 'administrate', github: "thoughtbot/administrate"
   gem 'bootstrap', '~> 4.3', '>= 4.3.1'
-  gem 'devise', '~> 4.6', '>= 4.6.1'
+  gem 'devise', '~> 4.6', '>= 4.6.2'
   gem 'devise-bootstrapped', github: 'excid3/devise-bootstrapped', branch: 'bootstrap4'
-  gem 'devise_masquerade', '~> 0.6.2'
-  gem 'font-awesome-sass', '~> 5.6', '>= 5.6.1'
+  gem 'devise_masquerade', '~> 0.6.5'
+  gem 'font-awesome-sass', '~> 5.9', '>= 5.9.0'
   gem 'friendly_id', '~> 5.2', '>= 5.2.5'
   gem 'gravatar_image_tag', github: 'mdeering/gravatar_image_tag'
-  gem 'name_of_person', '~> 1.1'
-  gem 'sidekiq', '~> 5.2', '>= 5.2.5'
+  gem 'name_of_person', '~> 1.1', '>= 1.1.1'
+  gem 'sidekiq', '~> 5.2', '>= 5.2.7'
   gem 'whenever', require: false
 
 end
