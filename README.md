@@ -1,6 +1,5 @@
 # Rails Template with Action Cable
-Based on [Jumpstart](https://github.com/excid3/jumpstart)
-
+Based on [Jumpstart](https://github.com/excid3/jumpstart)\
 **Note:** Requires Rails 6.0.0.rc2 or higher
 
 ## Changes to Jumpstart
@@ -20,7 +19,7 @@ You'll need the following installed to run the template successfully:
 
 * Ruby 2.5 or higher
 * Bundler - `gem install bundler`
-* Rails 6.0.0.rc2 or higher - `gem install rails` or `gem install rails --pre`
+* Rails 6.0.0.rc2 or higher - `gem install rails` or `gem install rails --pre`\
   **if using rbenv, run `rbenv rehash` after installing rails**
 * Yarn - `brew install yarn` or [Install Yarn](https://yarnpkg.com/en/docs/install)
 * Foreman (optional) - `gem install foreman` - helps run all your
